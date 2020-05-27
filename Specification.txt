@@ -38,3 +38,5 @@ insert.php
 
 
 localhostだけじゃなくfirebase使った方が良いのか？
+firebase使うメリットを考える！
+localhostだけでも履歴が表示されればいい気もする。
