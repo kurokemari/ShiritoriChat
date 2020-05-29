@@ -7,10 +7,14 @@
 </head>
 <body>
     <!-- タイトル表示 -->
-    <div>
-     <p>しりとりアプリ</p>
+    <header>
+    <div class="titel">
+     <p>つべこべ言わずに尻を取れ！！！</p>
     </div>
-
+    <div class="subtitel">
+     <p>えんまちゃんが性格の悪さをはっきする地獄のしりとりだよ！</p>
+    </div>
+    </header>
     <!-- 挑戦者欄 -->
     <form action="post" class="challenger">
      <input type="text" name="text" id="text">
