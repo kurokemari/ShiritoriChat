@@ -12,8 +12,8 @@
     </div>
 
     <!-- 挑戦者欄 -->
-    <form action="" class="challenger">
-     <input type="text" name="word" id="word">
+    <form action="post" class="challenger">
+     <input type="text" name="text" id="text">
      <input type="submit" value="送信">
     
     
