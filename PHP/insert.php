@@ -13,8 +13,10 @@ try {
   
   //３．データ登録SQL作成 //ここにカラム名を入力する
   //テーブル名を入力します
-  $stmt = $pdo->prepare("INSERT INTO ShiritoriChat_text_table(id, text, last, FLG)VALUES(NULL, :text, :last, :FLG");
+  $last = $pdo->prepare("RIGHT($text,1)");
+  $stmt = $pdo->prepare("INSERT INTO ShiritoriChat_text_table(id, text, last)VALUES(NULL, :text, :last");
   $stmt->bindValue(':text', $text, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
+  $stmt->bindValue(':last', $last, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
   $status = $stmt->execute();
   
   //４．データ登録処理後
@@ -24,7 +26,8 @@ try {
     exit("QueryError:".$error[2]);
   }else{
     //５．index.phpへリダイレクト 書くときにLocation: in この:　のあとは半角スペースがいるので注意！！
-    header("Location: select.php");
+    // header("Location: select.php");
+    echo ("やったぜ");
     exit;
   
   }
