@@ -39,11 +39,40 @@ if($status==false){
   $error = $stmt0->errorInfo();
   exit("QueryError:".$error[2]);
 }else{
-//５．index.phpへリダイレクト 書くときにLocation: in この:　のあとは半角スペースがいるので注意！！
-  header("Location: Shiritori.php");
-  exit;
+  $result = "";
 }
-  
+//５．index.phpへリダイレクト 書くときにLocation: in この:　のあとは半角スペースがいるので注意！！
+//   header("Location: Shiritori.php");
+//   exit;
+// }
+
+//５．履歴表示
+$view="";
+if($status==false){
+  //execute（SQL実行時にエラーがある場合）
+  $error = $stmt->errorInfo();
+  exit("ErrorQuery:".$error[2]);
+}else{
+  //Selectデータの数だけ自動でループしてくれる $resultの中に「カラム名」が入ってくるのでそれを表示させる例
+  while( $result = $stmt->fetch(PDO::FETCH_ASSOC)){
+    $view .= "<p>";
+    $view .= $result["text"];
+    $view .= "</p>";
+  }
+}
+echo ($view."アイウエオ");
 
 
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+<div class="container jumbotron"><?=$view?></div>
+</body>
+</html>
