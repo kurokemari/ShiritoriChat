@@ -42,7 +42,7 @@ if($status==false){
   $result = "";
 }
 //５．index.phpへリダイレクト 書くときにLocation: in この:　のあとは半角スペースがいるので注意！！
-//   header("Location: Shiritori.php");
+  header("Location: Shiritori.php");
 //   exit;
 // }
 

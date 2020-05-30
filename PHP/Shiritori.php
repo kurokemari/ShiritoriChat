@@ -54,7 +54,7 @@
 </script>
 
 <!-- firebase.js読み込み -->
-<script src="JS/firebase.js"></script>
+<script src="http://localhost/shiritoriChat/JS/firebase.js"></script>
 
     </body>
 </html>

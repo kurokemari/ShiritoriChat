@@ -11,6 +11,6 @@ $("#send").on("click", function () {
 newPostRef.on("child_added", function (data) {
   var v = data.val();
   var k = data.key;
-  var str = '<dl><dd>"+v.text+"</dd></dl>';
+  var str = "<dl><dt>あなた</dt><dd>" + v.text + "</dd></dl>";
   $("#output").prepend(str);
 });
