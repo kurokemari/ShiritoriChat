@@ -13,7 +13,7 @@
         <p>つべこべ言わずに尻を取れ！！！</p>
         </div>
         <div class="subtitel">
-        <p>えんまちゃんが性格の悪さをはっきする地獄のしりとりだよ！</p>
+        <p>えんまちゃんが性格の悪さをはっきする(?)地獄のしりとりだよ！</p>
         </div>
         </header>
         <!-- 挑戦者欄 -->
@@ -22,9 +22,7 @@
         <input type="submit" value="送信" id="send">
         </form>
         <!-- 履歴表示 -->
-        <div id=output>
-        
-        </div>
+        <div id=output></div>
         
 
 <!-- 以下Jquery -->

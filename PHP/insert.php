@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 
 // １．値を変数に登録（最後の文字はとりあえず空欄を登録）
 $text = $_POST["text"];
@@ -25,12 +27,12 @@ $stmt->bindValue(':last', $last, PDO::PARAM_STR);  //Integer（数値の場合 P
 $stmt->bindValue(':FLG', $FLG, PDO::PARAM_INT);  //Integer（数値の場合 PDO::PARAM_INT)
 $status = $stmt->execute();
 
-//３−２．最後の文字を抽出しUPDATEする
+//３−２．最後の文字をlastのカラムにUPDATEする
 $stmt0 = $pdo->prepare("UPDATE ShiritoriChat_text_table SET last=RIGHT(:text,1) WHERE text=:text");
 $stmt0->bindValue(':text', $text, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
 $status0 = $stmt0->execute();
 
-//４．データ登録処理後
+//４．データ登録後、エラーがなければShiritori.phpに戻る
 if($status==false){
   //SQL実行時にエラーがある場合（エラーオブジェクト取得して表示）
   $error = $stmt->errorInfo();
@@ -39,40 +41,65 @@ if($status==false){
   $error = $stmt0->errorInfo();
   exit("QueryError:".$error[2]);
 }else{
-  $result = "";
+  //Location: in この:　のあとは半角スペースがいるので注意！！
+  // header("Location: Shiritori.php");
+  // exit;
 }
-//５．index.phpへリダイレクト 書くときにLocation: in この:　のあとは半角スペースがいるので注意！！
-  header("Location: Shiritori.php");
-//   exit;
-// }
 
-//５．履歴表示
-$view="";
-if($status==false){
-  //execute（SQL実行時にエラーがある場合）
-  $error = $stmt->errorInfo();
-  exit("ErrorQuery:".$error[2]);
-}else{
-  //Selectデータの数だけ自動でループしてくれる $resultの中に「カラム名」が入ってくるのでそれを表示させる例
-  while( $result = $stmt->fetch(PDO::FETCH_ASSOC)){
-    $view .= "<p>";
-    $view .= $result["text"];
-    $view .= "</p>";
-  }
+// DBからBOTのコメントを受信
+// まずユーザーが送信した単語の最後の文字を取得
+try {
+$stmt1 = $pdo->prepare('SELECT last FROM ShiritoriChat_text_table WHERE text=:text');
+$stmt1->bindValue(':text', $text, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
+$stmt1->execute();
+} catch (PDOException $e) {
+    // 「500 Internal Server Error」にして，HTMLではなくテキストでエラーメッセージを表示して終了
+    header('Content-Type: text/plain; charset=UTF-8', true, 500);
+    exit($e->getMessge());
 }
-echo ($view."アイウエオ");
+foreach ($stmt1 as $row) {
+  $initial = $row['last'];
+}
+
+// 最後の文字を返信用テーブルの最初の文字から探し、返信用単語を取得
+
+$stmt2 = $pdo->prepare('SELECT * FROM ShiritoriChat_KU_table WHERE initial=:initial');
+$stmt2->bindValue(':initial', $initial, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
+$stmt2->execute();
+
+if( is_array($stmt2)) {
+foreach ($stmt2 as $row) {
+  $reword = $row['text'];
+};
+}else{
+  echo ("配列じゃないって！！");
+  $reword = $stmt2['text'];
+}
+
+var_dump($row2);
+
+
+// // 取得した返信用単語をfirebaseに保存
+// define("DEFAULT_URL","https://camp07-d036c.firebaseio.com/");
+// define("DEFAULT_TOKEN","wRY9YBWCvIrnQyE7BaexZtYkYwLUODec5XVJkUeI");
+// $test = array(
+//   "name" => "えんまちゃん",
+//   "text" => $reword,
+// );
+
+// $firebase = new \Firebase\FirebaseLib(DEFAULT_URL,DEFAULT_TOKEN);
+
+// // set
+// // $firebase->set("/users",$test);
+
+
+
+
 
 
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-<div class="container jumbotron"><?=$view?></div>
-</body>
-</html>
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
