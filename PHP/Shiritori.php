@@ -21,8 +21,12 @@
         <input type="text" name="text" id="text">
         <input type="submit" value="送信" id="send">
         </form>
+
+        <!-- えんまちゃんの返信格納（インビジブル） -->
+
+
         <!-- 履歴表示 -->
-        <div id=output></div>
+        <div id=output class=output></div>
         
 
 <!-- 以下Jquery -->
