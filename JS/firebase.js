@@ -28,6 +28,6 @@ window.onload = function () {
 newPostRef.on("child_added", function (data) {
   var v = data.val();
   var k = data.key;
-  var str = "<dl><dt>" + v.user + "</dt><dd>" + v.text + "</dd></dl>";
+  var str = "<dl><dt>" + k + "</dt><dd>" + v.text + "</dd></dl>";
   $("#output").prepend(str);
 });
