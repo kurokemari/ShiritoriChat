@@ -1,0 +1,69 @@
+@font-face {
+  font-family: "MyFont";
+  src: url(../PHP/togalite-bold.otf);
+}
+
+body {
+  background-color: bisque;
+  font-family: MyFont;
+  background-image: url(../IMG/background.jpeg);
+  text-align: center;
+}
+
+header {
+  background-image: url(../IMG/header.jpeg);
+  padding: 10px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 60px;
+  color: aliceblue;
+  margin: 20px;
+}
+
+p {
+  font-size: 40px;
+  color: aliceblue;
+  font-weight: bold;
+  margin: 30px;
+}
+
+.flex-box {
+  display: flex;
+  width: auto;
+  justify-content: center;
+}
+
+.enma {
+  border-radius: 100px;
+}
+
+form {
+  padding: 30px;
+}
+
+.output {
+  background-color: white;
+  background: rgba(255, 255, 255, 0.596);
+  /* opacity: 0.5; */
+  position: absolute;
+  margin: 30px;
+  border-radius: 10px;
+  text-align: left;
+}
+
+dl {
+  margin: 30px;
+  opacity: 0, -5;
+  color: black;
+}
+
+dd {
+  margin: 5px;
+  margin-left: 20px;
+  font-size: 25px;
+}
+dt {
+  margin: 10px;
+}
